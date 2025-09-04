@@ -12,7 +12,7 @@
       padding: 0;
       background-color: #121212;
       color: #ffffff;
-      font-size: 12px; /* 🔥 lebih kecil */
+      font-size: 12px; /* kecil */
     }
     header {
       position: sticky;
@@ -39,18 +39,14 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.5);
       transition: transform 0.3s ease;
     }
-    .form-section.hidden {
-      display: none;
-    }
+    .form-section.hidden { display: none; }
     .form-section h2 {
       margin-top: 0;
       font-size: 1em;
       border-bottom: 1px solid #444;
       padding-bottom: 6px;
     }
-    .form-group {
-      margin-bottom: 8px;
-    }
+    .form-group { margin-bottom: 8px; }
     .form-group label {
       display: block;
       font-weight: 600;
@@ -66,14 +62,8 @@
       color: #fff;
       font-size: 0.9em;
     }
-    .form-group input::placeholder {
-      color: #aaa;
-    }
-    .form-actions {
-      display: flex;
-      gap: 6px;
-      margin-top: 6px;
-    }
+    .form-group input::placeholder { color: #aaa; }
+    .form-actions { display: flex; gap: 6px; margin-top: 6px; }
     .form-actions button, .controls button {
       padding: 6px 12px;
       border: none;
@@ -84,16 +74,9 @@
       font-weight: 600;
       font-size: 0.8em;
     }
-    .form-actions button:hover, .controls button:hover {
-      background-color: #e68900;
-    }
-    .controls {
-      text-align: right;
-      margin-bottom: 8px;
-    }
-    .controls input {
-      font-size: 0.8em;
-    }
+    .form-actions button:hover, .controls button:hover { background-color: #e68900; }
+    .controls { text-align: right; margin-bottom: 8px; }
+    .controls input { font-size: 0.8em; }
     .table-section {
       flex: 1;
       padding: 10px;
@@ -115,9 +98,9 @@
       font-weight: normal;
     }
     th {
-      background-color: #ff9800;
+      background-color: #ff9800; /* kuning/oranye */
       color: #000;
-      font-weight: bold;
+      font-weight: 600;
     }
     .action-btns button {
       margin-right: 4px;
@@ -127,14 +110,14 @@
       cursor: pointer;
       font-size: 0.9em;
     }
-    .edit-btn { background-color: #4caf50; color: white; }
-    .view-btn { background-color: #2196f3; color: white; }
-    .download-btn { background-color: #9c27b0; color: white; }
-    .delete-btn { background-color: #f44336; color: white; }
+    .edit-btn { background-color: #4caf50; color: white; }     /* ✏ */
+    .view-btn { background-color: #2196f3; color: white; }     /* 👁 */
+    .download-btn { background-color: #9c27b0; color: white; } /* ⬇ */
+    .delete-btn { background-color: #f44336; color: white; }   /* ❌ */
     .toggle-btn {
       position: fixed;
-      top: 70px;
-      left: 20px;
+      top: 12px;
+      left: 12px;
       background-color: #444;
       color: white;
       border: none;
@@ -193,8 +176,7 @@
   let jobData = [];
 
   function toggleForm() {
-    const panel = document.getElementById("formPanel");
-    panel.classList.toggle("hidden");
+    document.getElementById("formPanel").classList.toggle("hidden");
   }
 
   function addData() {
@@ -215,9 +197,7 @@
     });
   }
 
-  function getVal(id) {
-    return document.getElementById(id).value;
-  }
+  function getVal(id) { return document.getElementById(id).value; }
 
   function getFileBase64(id) {
     return new Promise(resolve => {
@@ -238,62 +218,70 @@
     tbody.innerHTML = "";
     jobData.forEach((item, index) => {
       const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${item.room}</td><td>${item.model}</td><td>${item.order}</td><td>${item.shortText}</td>
-        <td>${item.vendor}</td><td>${item.noQuot}</td><td>${item.quotFile?.name || '-'}</td>
-        <td>${item.farFile?.name || '-'}</td><td>${item.ccrFile?.name || '-'}</td>
-        <td>${item.pr}</td><td>${item.po}</td><td>${item.sow}</td><td>${item.ses}</td>
-        <td class="action-btns">
-          <button class="edit-btn" onclick="editData(${index})">✏</button>
-          <button class="view-btn" onclick="viewFiles(${index})">👁</button>
-          <button class="download-btn" onclick="downloadFiles(${index})">⬇</button>
-          <button class="delete-btn" onclick="deleteData(${index})">❌</button>
-        </td>
-      `;
+      row.innerHTML =
+        '<td>' + (item.room || '') + '</td>' +
+        '<td>' + (item.model || '') + '</td>' +
+        '<td>' + (item.order || '') + '</td>' +
+        '<td>' + (item.shortText || '') + '</td>' +
+        '<td>' + (item.vendor || '') + '</td>' +
+        '<td>' + (item.noQuot || '') + '</td>' +
+        '<td>' + (item.quotFile ? item.quotFile.name : '-') + '</td>' +
+        '<td>' + (item.farFile ? item.farFile.name : '-') + '</td>' +
+        '<td>' + (item.ccrFile ? item.ccrFile.name : '-') + '</td>' +
+        '<td>' + (item.pr || '') + '</td>' +
+        '<td>' + (item.po || '') + '</td>' +
+        '<td>' + (item.sow || '') + '</td>' +
+        '<td>' + (item.ses || '') + '</td>' +
+        '<td class="action-btns">' +
+          '<button class="edit-btn" onclick="editData(' + index + ')">✏</button>' +
+          '<button class="view-btn" onclick="viewFiles(' + index + ')">👁</button>' +
+          '<button class="download-btn" onclick="downloadFiles(' + index + ')">⬇</button>' +
+          '<button class="delete-btn" onclick="deleteData(' + index + ')">❌</button>' +
+        '</td>';
       tbody.appendChild(row);
     });
   }
 
   function editData(index) {
     const item = jobData[index];
-    document.getElementById("room").value = item.room;
-    document.getElementById("model").value = item.model;
-    document.getElementById("order").value = item.order;
-    document.getElementById("shortText").value = item.shortText;
-    document.getElementById("vendor").value = item.vendor;
-    document.getElementById("noQuot").value = item.noQuot;
-    document.getElementById("pr").value = item.pr;
-    document.getElementById("po").value = item.po;
-    document.getElementById("sow").value = item.sow;
-    document.getElementById("ses").value = item.ses;
+    document.getElementById("room").value = item.room || '';
+    document.getElementById("model").value = item.model || '';
+    document.getElementById("order").value = item.order || '';
+    document.getElementById("shortText").value = item.shortText || '';
+    document.getElementById("vendor").value = item.vendor || '';
+    document.getElementById("noQuot").value = item.noQuot || '';
+    document.getElementById("pr").value = item.pr || '';
+    document.getElementById("po").value = item.po || '';
+    document.getElementById("sow").value = item.sow || '';
+    document.getElementById("ses").value = item.ses || '';
     jobData.splice(index, 1);
     renderTable();
   }
 
+  // ✅ TANPA template literal
   function viewFiles(index) {
     const item = jobData[index];
     const files = [
       { label: "Quot", file: item.quotFile },
-      { label: "FAR", file: item.farFile },
-      { label: "CCR", file: item.ccrFile }
+      { label: "FAR",  file: item.farFile  },
+      { label: "CCR",  file: item.ccrFile  }
     ];
-    const available = files.filter(f => f.file);
+    const available = files.filter(function (f) { return !!f.file; });
     if (available.length === 0) {
       alert("Tidak ada file untuk dilihat.");
       return;
     }
     if (available.length === 1) {
-      const f = available[0];
-      const blob = dataURLtoBlob(f.file.data);
+      const blob = dataURLtoBlob(available[0].file.data);
       window.open(URL.createObjectURL(blob), "_blank");
       return;
     }
-    let options = "Pilih file untuk dilihat:\n";
-    available.forEach((f, i) => {
-      options += ${i+1}. ${f.label} (${f.file.name})\n;
+    var options = "Pilih file untuk dilihat:\n";
+    available.forEach(function (f, i) {
+      options += (i + 1) + ". " + f.label + " (" + f.file.name + ")\n";
     });
-    const choice = prompt(options, "1");
-    const idx = parseInt(choice) - 1;
+    var choice = prompt(options, "1");
+    var idx = parseInt(choice, 10) - 1;
     if (!isNaN(idx) && available[idx]) {
       const blob = dataURLtoBlob(available[idx].file.data);
       window.open(URL.createObjectURL(blob), "_blank");
@@ -302,7 +290,7 @@
 
   function downloadFiles(index) {
     const item = jobData[index];
-    [item.quotFile, item.farFile, item.ccrFile].forEach(file => {
+    [item.quotFile, item.farFile, item.ccrFile].forEach(function (file) {
       if (file) {
         const blob = dataURLtoBlob(file.data);
         const link = document.createElement("a");
