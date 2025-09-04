@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Exception Component</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -12,58 +12,51 @@
       padding: 0;
       background-color: #121212;
       color: #ffffff;
-      font-size: 12px; /* 🔥 default kecil */
+      font-size: 12px; /* 🔥 lebih kecil */
     }
-
     header {
       position: sticky;
       top: 0;
       background-color: #1f1f1f;
       padding: 12px;
       text-align: center;
-      font-size: 1.3em; /* lebih besar dari body */
+      font-size: 1.2em;
       font-weight: bold;
       border-bottom: 2px solid #ff9800;
       z-index: 1000;
     }
-
     .container {
       display: flex;
       flex-direction: row;
-      padding: 12px;
-      gap: 12px;
+      padding: 10px;
+      gap: 10px;
     }
-
     .form-section {
-      width: 280px;
+      width: 260px;
       background: #1e1e1e;
-      padding: 12px;
+      padding: 10px;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
       transition: transform 0.3s ease;
     }
     .form-section.hidden {
       display: none;
     }
-
     .form-section h2 {
       margin-top: 0;
       font-size: 1em;
       border-bottom: 1px solid #444;
       padding-bottom: 6px;
     }
-
     .form-group {
       margin-bottom: 8px;
     }
-
     .form-group label {
       display: block;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin-bottom: 3px;
       font-size: 0.9em;
     }
-
     .form-group input {
       width: 100%;
       padding: 6px;
@@ -73,90 +66,74 @@
       color: #fff;
       font-size: 0.9em;
     }
-
     .form-group input::placeholder {
       color: #aaa;
     }
-
     .form-actions {
       display: flex;
       gap: 6px;
       margin-top: 6px;
     }
-
     .form-actions button, .controls button {
       padding: 6px 12px;
       border: none;
       border-radius: 6px;
       background-color: #ff9800;
-      color: black;
+      color: white;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.85em;
+      font-size: 0.8em;
     }
-
     .form-actions button:hover, .controls button:hover {
       background-color: #e68900;
     }
-
     .controls {
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 8px;
+      text-align: right;
       margin-bottom: 8px;
     }
-
-    .controls input[type="file"] {
+    .controls input {
       font-size: 0.8em;
     }
-
     .table-section {
       flex: 1;
-      padding: 12px;
+      padding: 10px;
       background-color: #1e1e1e;
       border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
       background-color: #1e1e1e;
       color: #fff;
-      font-size: 0.8em; /* 🔥 kecilin font tabel */
+      font-size: 0.8em; /* tabel lebih kecil */
     }
-
     th, td {
-      border: 1px solid #fff;
+      border: 1px solid #555;
       padding: 6px;
       text-align: left;
       font-weight: normal;
     }
-
     th {
-      background: linear-gradient(135deg, #ff9800, #ffb74d);
+      background-color: #ff9800;
       color: #000;
-      font-weight: 600;
+      font-weight: bold;
     }
-
     .action-btns button {
       margin-right: 4px;
-      padding: 4px 6px;
+      padding: 2px 6px;
       border: none;
       border-radius: 4px;
-      background: transparent;
-      font-size: 1.1em;
       cursor: pointer;
+      font-size: 0.9em;
     }
-
-    .action-btns button:hover {
-      transform: scale(1.2);
-    }
-
+    .edit-btn { background-color: #4caf50; color: white; }
+    .view-btn { background-color: #2196f3; color: white; }
+    .download-btn { background-color: #9c27b0; color: white; }
+    .delete-btn { background-color: #f44336; color: white; }
     .toggle-btn {
       position: fixed;
-      top: 20px;
+      top: 70px;
       left: 20px;
       background-color: #444;
       color: white;
@@ -170,7 +147,7 @@
 </head>
 <body>
 
-<header>⚡ Exception Component</header>
+<header>⚙ Exception Component</header>
 <button class="toggle-btn" onclick="toggleForm()">☰</button>
 
 <div class="container">
@@ -190,7 +167,7 @@
     <div class="form-group"><label>SOW</label><input id="sow" type="text" placeholder="Scope of Work..."></div>
     <div class="form-group"><label>SES</label><input id="ses" type="text" placeholder="Nomor SES..."></div>
     <div class="form-actions">
-      <button onclick="addData()">✅ Save</button>
+      <button onclick="addData()">💾 Save</button>
       <button onclick="resetForm()">♻ Reset</button>
     </div>
   </div>
@@ -216,32 +193,40 @@
   let jobData = [];
 
   function toggleForm() {
-    document.getElementById("formPanel").classList.toggle("hidden");
+    const panel = document.getElementById("formPanel");
+    panel.classList.toggle("hidden");
   }
 
   function addData() {
-    const filesToBase64 = (inputId) => {
-      const file = document.getElementById(inputId).files[0];
-      if (!file) return null;
-      return { name: file.name, type: file.type, data: null, file }; 
-    };
-
-    const data = {
-      room: getVal("room"), model: getVal("model"), order: getVal("order"),
-      shortText: getVal("shortText"), vendor: getVal("vendor"), noQuot: getVal("noQuot"),
-      pr: getVal("pr"), po: getVal("po"), sow: getVal("sow"), ses: getVal("ses"),
-      quotFile: filesToBase64("quotFile"),
-      farFile: filesToBase64("farFile"),
-      ccrFile: filesToBase64("ccrFile")
-    };
-
-    jobData.push(data);
-    renderTable();
-    resetForm();
+    Promise.all([
+      getFileBase64("quotFile"),
+      getFileBase64("farFile"),
+      getFileBase64("ccrFile")
+    ]).then(([quotFile, farFile, ccrFile]) => {
+      const data = {
+        room: getVal("room"), model: getVal("model"), order: getVal("order"),
+        shortText: getVal("shortText"), vendor: getVal("vendor"), noQuot: getVal("noQuot"),
+        pr: getVal("pr"), po: getVal("po"), sow: getVal("sow"), ses: getVal("ses"),
+        quotFile, farFile, ccrFile
+      };
+      jobData.push(data);
+      renderTable();
+      resetForm();
+    });
   }
 
   function getVal(id) {
     return document.getElementById(id).value;
+  }
+
+  function getFileBase64(id) {
+    return new Promise(resolve => {
+      const fileInput = document.getElementById(id);
+      if (!fileInput.files[0]) return resolve(null);
+      const reader = new FileReader();
+      reader.onload = () => resolve({ name: fileInput.files[0].name, data: reader.result });
+      reader.readAsDataURL(fileInput.files[0]);
+    });
   }
 
   function resetForm() {
@@ -259,10 +244,10 @@
         <td>${item.farFile?.name || '-'}</td><td>${item.ccrFile?.name || '-'}</td>
         <td>${item.pr}</td><td>${item.po}</td><td>${item.sow}</td><td>${item.ses}</td>
         <td class="action-btns">
-          <button onclick="editData(${index})" title="Edit">✏</button>
-          <button onclick="viewFiles(${index})" title="View">👁</button>
-          <button onclick="downloadFiles(${index})" title="Download">⬇</button>
-          <button onclick="deleteData(${index})" title="Delete">❌</button>
+          <button class="edit-btn" onclick="editData(${index})">✏</button>
+          <button class="view-btn" onclick="viewFiles(${index})">👁</button>
+          <button class="download-btn" onclick="downloadFiles(${index})">⬇</button>
+          <button class="delete-btn" onclick="deleteData(${index})">❌</button>
         </td>
       `;
       tbody.appendChild(row);
@@ -299,7 +284,7 @@
     }
     if (available.length === 1) {
       const f = available[0];
-      const blob = f.file.file || f.file;
+      const blob = dataURLtoBlob(f.file.data);
       window.open(URL.createObjectURL(blob), "_blank");
       return;
     }
@@ -310,18 +295,19 @@
     const choice = prompt(options, "1");
     const idx = parseInt(choice) - 1;
     if (!isNaN(idx) && available[idx]) {
-      const blob = available[idx].file.file || available[idx].file;
+      const blob = dataURLtoBlob(available[idx].file.data);
       window.open(URL.createObjectURL(blob), "_blank");
     }
   }
 
   function downloadFiles(index) {
-    const files = [jobData[index].quotFile, jobData[index].farFile, jobData[index].ccrFile];
-    files.forEach(f => {
-      if (f?.file) {
+    const item = jobData[index];
+    [item.quotFile, item.farFile, item.ccrFile].forEach(file => {
+      if (file) {
+        const blob = dataURLtoBlob(file.data);
         const link = document.createElement("a");
-        link.href = URL.createObjectURL(f.file);
-        link.download = f.name;
+        link.href = URL.createObjectURL(blob);
+        link.download = file.name;
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link);
@@ -335,31 +321,11 @@
   }
 
   function saveJSON() {
-    const convertFile = (f) => {
-      if (!f || !f.file) return null;
-      return new Promise(resolve => {
-        const reader = new FileReader();
-        reader.onload = e => {
-          resolve({ name: f.name, type: f.type, data: e.target.result });
-        };
-        reader.readAsDataURL(f.file);
-      });
-    };
-
-    Promise.all(jobData.map(async item => {
-      return {
-        ...item,
-        quotFile: await convertFile(item.quotFile),
-        farFile: await convertFile(item.farFile),
-        ccrFile: await convertFile(item.ccrFile)
-      };
-    })).then(finalData => {
-      const blob = new Blob([JSON.stringify(finalData, null, 2)], { type: "application/json" });
-      const link = document.createElement("a");
-      link.href = URL.createObjectURL(blob);
-      link.download = "jobflow_data.json";
-      link.click();
-    });
+    const blob = new Blob([JSON.stringify(jobData, null, 2)], { type: "application/json" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "exception_component.json";
+    link.click();
   }
 
   function loadJSON(event) {
@@ -367,31 +333,20 @@
     if (!file) return;
     const reader = new FileReader();
     reader.onload = function(e) {
-      const content = JSON.parse(e.target.result);
-      jobData = content.map(item => {
-        const restore = (f) => {
-          if (!f) return null;
-          const arr = f.data.split(",");
-          const mime = arr[0].match(/:(.*?);/)[1];
-          const bstr = atob(arr[1]);
-          let n = bstr.length;
-          const u8arr = new Uint8Array(n);
-          while(n--) {
-            u8arr[n] = bstr.charCodeAt(n);
-          }
-          const blob = new Blob([u8arr], { type: mime });
-          return { ...f, file: blob };
-        };
-        return {
-          ...item,
-          quotFile: restore(item.quotFile),
-          farFile: restore(item.farFile),
-          ccrFile: restore(item.ccrFile)
-        };
-      });
+      jobData = JSON.parse(e.target.result);
       renderTable();
     };
     reader.readAsText(file);
+  }
+
+  function dataURLtoBlob(dataURL) {
+    const arr = dataURL.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+    while(n--) u8arr[n] = bstr.charCodeAt(n);
+    return new Blob([u8arr], {type:mime});
   }
 </script>
 
