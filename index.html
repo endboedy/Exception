@@ -3,65 +3,195 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Exception</title>
+  <title>Exception Component</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; margin:0; padding:0; background:#121212; color:#fff; }
-    header { position:sticky; top:0; background:#1f1f1f; padding:20px; text-align:center; font-size:1.5em; font-weight:bold; border-bottom:2px solid #ff9800; z-index:1000; }
-    .container { display:flex; padding:20px; gap:20px; transition:all 0.3s ease; }
-    .form-section { width:300px; background:#1e1e1e; padding:20px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.5); transition:all 0.3s ease; }
-    .form-section.hidden { display:none; }
-    .form-group { margin-bottom:12px; }
-    .form-group label { display:block; font-weight:600; margin-bottom:4px; }
-    .form-group input { width:100%; padding:8px; border:1px solid #444; border-radius:6px; background:#2c2c2c; color:#fff; }
-    .form-group input::placeholder { color:#aaa; }
-    .form-actions { display:flex; gap:10px; margin-top:10px; }
-    .form-actions button, .controls button { padding:8px 16px; border:none; border-radius:6px; background:#ff9800; color:white; cursor:pointer; font-weight:600; }
-    .form-actions button:hover, .controls button:hover { background:#e68900; }
-    .controls { text-align:right; margin-bottom:10px; }
-    .controls button { padding:6px 10px; font-size:0.8em; }
-    .table-section { flex:1; padding:20px; background:#1e1e1e; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.5); transition:all 0.3s ease; }
-    table { width:100%; border-collapse:collapse; background:#1e1e1e; color:#fff; font-size:0.85em; }
-    th, td { border:1px solid #fff; padding:6px 8px; text-align:left; font-weight:normal; }
-    th { background:linear-gradient(135deg, #ff9800, #ffb74d); color:#000; font-weight:600; }
-    .action-btns button { margin-right:4px; padding:4px 6px; border:none; border-radius:4px; font-size:1.1em; cursor:pointer; background:transparent; }
-    .action-btns button.edit { color:#4caf50; } .action-btns button.view { color:#2196f3; } 
-    .action-btns button.download { color:#ffeb3b; } .action-btns button.delete { color:#f44336; }
-    .toggle-btn { position:fixed; top:20px; left:20px; background:#444; color:white; border:none; padding:6px 12px; border-radius:4px; cursor:pointer; z-index:1001; }
-    .modal { display:none; position:fixed; z-index:2000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center; }
-    .modal-content { background:#2c2c2c; padding:20px; border-radius:8px; text-align:center; }
-    .modal-content h3 { margin-top:0; margin-bottom:10px; }
-    .modal-content button { margin:5px; padding:8px 12px; border:none; border-radius:6px; cursor:pointer; font-weight:600; }
-    .modal-content button.quot { background:#2196f3; color:#fff; }
-    .modal-content button.far { background:#9c27b0; color:#fff; }
-    .modal-content button.ccr { background:#ff5722; color:#fff; }
-    .modal-content button.close { background:#555; color:#fff; }
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #121212;
+      color: #ffffff;
+      font-size: 12px; /* 🔥 default kecil */
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      background-color: #1f1f1f;
+      padding: 12px;
+      text-align: center;
+      font-size: 1.3em; /* lebih besar dari body */
+      font-weight: bold;
+      border-bottom: 2px solid #ff9800;
+      z-index: 1000;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: row;
+      padding: 12px;
+      gap: 12px;
+    }
+
+    .form-section {
+      width: 280px;
+      background: #1e1e1e;
+      padding: 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+    .form-section.hidden {
+      display: none;
+    }
+
+    .form-section h2 {
+      margin-top: 0;
+      font-size: 1em;
+      border-bottom: 1px solid #444;
+      padding-bottom: 6px;
+    }
+
+    .form-group {
+      margin-bottom: 8px;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 0.9em;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 6px;
+      border: 1px solid #444;
+      border-radius: 6px;
+      background-color: #2c2c2c;
+      color: #fff;
+      font-size: 0.9em;
+    }
+
+    .form-group input::placeholder {
+      color: #aaa;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .form-actions button, .controls button {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      background-color: #ff9800;
+      color: black;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85em;
+    }
+
+    .form-actions button:hover, .controls button:hover {
+      background-color: #e68900;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+
+    .controls input[type="file"] {
+      font-size: 0.8em;
+    }
+
+    .table-section {
+      flex: 1;
+      padding: 12px;
+      background-color: #1e1e1e;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #1e1e1e;
+      color: #fff;
+      font-size: 0.8em; /* 🔥 kecilin font tabel */
+    }
+
+    th, td {
+      border: 1px solid #fff;
+      padding: 6px;
+      text-align: left;
+      font-weight: normal;
+    }
+
+    th {
+      background: linear-gradient(135deg, #ff9800, #ffb74d);
+      color: #000;
+      font-weight: 600;
+    }
+
+    .action-btns button {
+      margin-right: 4px;
+      padding: 4px 6px;
+      border: none;
+      border-radius: 4px;
+      background: transparent;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+
+    .action-btns button:hover {
+      transform: scale(1.2);
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background-color: #444;
+      color: white;
+      border: none;
+      padding: 6px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+      z-index: 1001;
+    }
   </style>
 </head>
 <body>
 
-<header>📋 Exception/header>
+<header>⚡ Exception Component</header>
 <button class="toggle-btn" onclick="toggleForm()">☰</button>
 
 <div class="container">
   <div class="form-section" id="formPanel">
     <h2>Tambah / Edit Data</h2>
-    <div class="form-group"><label>Room</label><input id="room" type="text"></div>
-    <div class="form-group"><label>Model</label><input id="model" type="text"></div>
-    <div class="form-group"><label>Order Number</label><input id="order" type="text"></div>
-    <div class="form-group"><label>Short Text</label><input id="shortText" type="text"></div>
-    <div class="form-group"><label>Vendor</label><input id="vendor" type="text"></div>
-    <div class="form-group"><label>No Quot</label><input id="noQuot" type="text"></div>
+    <div class="form-group"><label>Room</label><input id="room" type="text" placeholder="Masukkan Room..."></div>
+    <div class="form-group"><label>Model</label><input id="model" type="text" placeholder="Masukkan Model..."></div>
+    <div class="form-group"><label>Order Number</label><input id="order" type="text" placeholder="Masukkan Order Number..."></div>
+    <div class="form-group"><label>Short Text</label><input id="shortText" type="text" placeholder="Deskripsi singkat..."></div>
+    <div class="form-group"><label>Vendor</label><input id="vendor" type="text" placeholder="Nama Vendor..."></div>
+    <div class="form-group"><label>No Quot</label><input id="noQuot" type="text" placeholder="Nomor Quotation..."></div>
     <div class="form-group"><label>Quot (PDF/PNG)</label><input id="quotFile" type="file" accept=".pdf,.png"></div>
     <div class="form-group"><label>FAR (PDF/PNG)</label><input id="farFile" type="file" accept=".pdf,.png"></div>
     <div class="form-group"><label>CCR (PDF/PNG)</label><input id="ccrFile" type="file" accept=".pdf,.png"></div>
-    <div class="form-group"><label>PR</label><input id="pr" type="text"></div>
-    <div class="form-group"><label>PO</label><input id="po" type="text"></div>
-    <div class="form-group"><label>SOW</label><input id="sow" type="text"></div>
-    <div class="form-group"><label>SES</label><input id="ses" type="text"></div>
+    <div class="form-group"><label>PR</label><input id="pr" type="text" placeholder="Nomor PR..."></div>
+    <div class="form-group"><label>PO</label><input id="po" type="text" placeholder="Nomor PO..."></div>
+    <div class="form-group"><label>SOW</label><input id="sow" type="text" placeholder="Scope of Work..."></div>
+    <div class="form-group"><label>SES</label><input id="ses" type="text" placeholder="Nomor SES..."></div>
     <div class="form-actions">
-      <button onclick="addData()">Save</button>
-      <button onclick="resetForm()">Reset</button>
+      <button onclick="addData()">✅ Save</button>
+      <button onclick="resetForm()">♻ Reset</button>
     </div>
   </div>
 
@@ -82,15 +212,6 @@
   </div>
 </div>
 
-<!-- Modal -->
-<div class="modal" id="fileModal">
-  <div class="modal-content">
-    <h3>Pilih file untuk dilihat</h3>
-    <div id="fileButtons"></div>
-    <button class="close" onclick="closeModal()">Tutup</button>
-  </div>
-</div>
-
 <script>
   let jobData = [];
 
@@ -99,123 +220,180 @@
   }
 
   function addData() {
+    const filesToBase64 = (inputId) => {
+      const file = document.getElementById(inputId).files[0];
+      if (!file) return null;
+      return { name: file.name, type: file.type, data: null, file }; 
+    };
+
     const data = {
       room: getVal("room"), model: getVal("model"), order: getVal("order"),
       shortText: getVal("shortText"), vendor: getVal("vendor"), noQuot: getVal("noQuot"),
-      pr: getVal("pr"), po: getVal("po"), sow: getVal("sow"), ses: getVal("ses")
+      pr: getVal("pr"), po: getVal("po"), sow: getVal("sow"), ses: getVal("ses"),
+      quotFile: filesToBase64("quotFile"),
+      farFile: filesToBase64("farFile"),
+      ccrFile: filesToBase64("ccrFile")
     };
-    Promise.all([
-      fileToBase64("quotFile"), fileToBase64("farFile"), fileToBase64("ccrFile")
-    ]).then(([quot, far, ccr]) => {
-      data.quotFile = quot;
-      data.farFile = far;
-      data.ccrFile = ccr;
-      jobData.push(data);
-      renderTable();
-      resetForm();
-    });
+
+    jobData.push(data);
+    renderTable();
+    resetForm();
   }
 
-  function getVal(id){ return document.getElementById(id).value; }
-
-  function fileToBase64(id){
-    const file = document.getElementById(id).files[0];
-    return new Promise(resolve=>{
-      if(!file){ resolve(null); return; }
-      const reader = new FileReader();
-      reader.onload = ()=> resolve({ name:file.name, type:file.type, data:reader.result });
-      reader.readAsDataURL(file);
-    });
+  function getVal(id) {
+    return document.getElementById(id).value;
   }
 
-  function base64ToFile(obj){
-    if(!obj) return null;
-    const arr = obj.data.split(","), mime = arr[0].match(/:(.*?);/)[1];
-    const bstr = atob(arr[1]); let n = bstr.length; const u8arr = new Uint8Array(n);
-    while(n--){ u8arr[n] = bstr.charCodeAt(n); }
-    return new File([u8arr], obj.name, { type: mime });
+  function resetForm() {
+    document.querySelectorAll(".form-group input").forEach(input => input.value = "");
   }
-
-  function resetForm(){ document.querySelectorAll(".form-group input").forEach(i=>i.value=""); }
 
   function renderTable() {
-    const tbody = document.querySelector("#dataTable tbody"); tbody.innerHTML="";
-    jobData.forEach((item,i)=>{
-      const row=document.createElement("tr");
-      row.innerHTML=`
+    const tbody = document.querySelector("#dataTable tbody");
+    tbody.innerHTML = "";
+    jobData.forEach((item, index) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
         <td>${item.room}</td><td>${item.model}</td><td>${item.order}</td><td>${item.shortText}</td>
         <td>${item.vendor}</td><td>${item.noQuot}</td><td>${item.quotFile?.name || '-'}</td>
         <td>${item.farFile?.name || '-'}</td><td>${item.ccrFile?.name || '-'}</td>
         <td>${item.pr}</td><td>${item.po}</td><td>${item.sow}</td><td>${item.ses}</td>
         <td class="action-btns">
-          <button class="edit" onclick="editData(${i})">✏</button>
-          <button class="view" onclick="viewFiles(${i})">👁</button>
-          <button class="download" onclick="downloadFiles(${i})">⬇</button>
-          <button class="delete" onclick="deleteData(${i})">❌</button>
-        </td>`;
+          <button onclick="editData(${index})" title="Edit">✏</button>
+          <button onclick="viewFiles(${index})" title="View">👁</button>
+          <button onclick="downloadFiles(${index})" title="Download">⬇</button>
+          <button onclick="deleteData(${index})" title="Delete">❌</button>
+        </td>
+      `;
       tbody.appendChild(row);
     });
   }
 
-  function editData(i){ const item=jobData[i];
-    document.getElementById("room").value=item.room;
-    document.getElementById("model").value=item.model;
-    document.getElementById("order").value=item.order;
-    document.getElementById("shortText").value=item.shortText;
-    document.getElementById("vendor").value=item.vendor;
-    document.getElementById("noQuot").value=item.noQuot;
-    document.getElementById("pr").value=item.pr;
-    document.getElementById("po").value=item.po;
-    document.getElementById("sow").value=item.sow;
-    document.getElementById("ses").value=item.ses;
-    jobData.splice(i,1); renderTable();
+  function editData(index) {
+    const item = jobData[index];
+    document.getElementById("room").value = item.room;
+    document.getElementById("model").value = item.model;
+    document.getElementById("order").value = item.order;
+    document.getElementById("shortText").value = item.shortText;
+    document.getElementById("vendor").value = item.vendor;
+    document.getElementById("noQuot").value = item.noQuot;
+    document.getElementById("pr").value = item.pr;
+    document.getElementById("po").value = item.po;
+    document.getElementById("sow").value = item.sow;
+    document.getElementById("ses").value = item.ses;
+    jobData.splice(index, 1);
+    renderTable();
   }
 
-  function viewFiles(i){
-    const item=jobData[i];
-    const files=[
-      {label:"Quot",file:base64ToFile(item.quotFile),cls:"quot"},
-      {label:"FAR",file:base64ToFile(item.farFile),cls:"far"},
-      {label:"CCR",file:base64ToFile(item.ccrFile),cls:"ccr"}
-    ].filter(f=>f.file);
-    if(!files.length){ alert("Tidak ada file untuk dilihat."); return; }
-    const cont=document.getElementById("fileButtons"); cont.innerHTML="";
-    files.forEach(f=>{
-      const btn=document.createElement("button");
-      btn.textContent=f.label; btn.className=f.cls;
-      btn.onclick=()=>window.open(URL.createObjectURL(f.file),"_blank");
-      cont.appendChild(btn);
+  function viewFiles(index) {
+    const item = jobData[index];
+    const files = [
+      { label: "Quot", file: item.quotFile },
+      { label: "FAR", file: item.farFile },
+      { label: "CCR", file: item.ccrFile }
+    ];
+    const available = files.filter(f => f.file);
+    if (available.length === 0) {
+      alert("Tidak ada file untuk dilihat.");
+      return;
+    }
+    if (available.length === 1) {
+      const f = available[0];
+      const blob = f.file.file || f.file;
+      window.open(URL.createObjectURL(blob), "_blank");
+      return;
+    }
+    let options = "Pilih file untuk dilihat:\n";
+    available.forEach((f, i) => {
+      options += ${i+1}. ${f.label} (${f.file.name})\n;
     });
-    document.getElementById("fileModal").style.display="flex";
+    const choice = prompt(options, "1");
+    const idx = parseInt(choice) - 1;
+    if (!isNaN(idx) && available[idx]) {
+      const blob = available[idx].file.file || available[idx].file;
+      window.open(URL.createObjectURL(blob), "_blank");
+    }
   }
 
-  function closeModal(){ document.getElementById("fileModal").style.display="none"; }
+  function downloadFiles(index) {
+    const files = [jobData[index].quotFile, jobData[index].farFile, jobData[index].ccrFile];
+    files.forEach(f => {
+      if (f?.file) {
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(f.file);
+        link.download = f.name;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    });
+  }
 
-  function downloadFiles(i){
-    [base64ToFile(jobData[i].quotFile), base64ToFile(jobData[i].farFile), base64ToFile(jobData[i].ccrFile)]
-      .forEach(file=>{
-        if(file){ const link=document.createElement("a");
-          link.href=URL.createObjectURL(file); link.download=file.name;
-          document.body.appendChild(link); link.click(); document.body.removeChild(link);
-        }
+  function deleteData(index) {
+    jobData.splice(index, 1);
+    renderTable();
+  }
+
+  function saveJSON() {
+    const convertFile = (f) => {
+      if (!f || !f.file) return null;
+      return new Promise(resolve => {
+        const reader = new FileReader();
+        reader.onload = e => {
+          resolve({ name: f.name, type: f.type, data: e.target.result });
+        };
+        reader.readAsDataURL(f.file);
       });
+    };
+
+    Promise.all(jobData.map(async item => {
+      return {
+        ...item,
+        quotFile: await convertFile(item.quotFile),
+        farFile: await convertFile(item.farFile),
+        ccrFile: await convertFile(item.ccrFile)
+      };
+    })).then(finalData => {
+      const blob = new Blob([JSON.stringify(finalData, null, 2)], { type: "application/json" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "jobflow_data.json";
+      link.click();
+    });
   }
 
-  function deleteData(i){ jobData.splice(i,1); renderTable(); }
-
-  function saveJSON(){
-    const blob=new Blob([JSON.stringify(jobData,null,2)],{type:"application/json"});
-    const link=document.createElement("a"); link.href=URL.createObjectURL(blob);
-    link.download="jobflow_data.json"; link.click();
-  }
-
-  function loadJSON(e){
-    const file=e.target.files[0]; if(!file) return;
-    const reader=new FileReader();
-    reader.onload=function(ev){ jobData=JSON.parse(ev.target.result); renderTable(); };
+  function loadJSON(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      const content = JSON.parse(e.target.result);
+      jobData = content.map(item => {
+        const restore = (f) => {
+          if (!f) return null;
+          const arr = f.data.split(",");
+          const mime = arr[0].match(/:(.*?);/)[1];
+          const bstr = atob(arr[1]);
+          let n = bstr.length;
+          const u8arr = new Uint8Array(n);
+          while(n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+          }
+          const blob = new Blob([u8arr], { type: mime });
+          return { ...f, file: blob };
+        };
+        return {
+          ...item,
+          quotFile: restore(item.quotFile),
+          farFile: restore(item.farFile),
+          ccrFile: restore(item.ccrFile)
+        };
+      });
+      renderTable();
+    };
     reader.readAsText(file);
   }
 </script>
+
 </body>
 </html>
-
